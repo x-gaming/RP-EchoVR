@@ -80,7 +80,7 @@ You can always [join my discord server](https://discord.gg/7cxBkBr/ "invite link
 If you don't want to have another server in your list, you can also send me a direct message, my discord-username is: x_gaming#4786
 If you like the application or have an idea on how to improve it - let me know :D
 
-## external ressources
+## External ressources
 * [ExecutionPolicy](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.1/ "ExecutionPolicy")
 * [Discords rich presence](https://discord.com/developers/docs/game-sdk/ "Discords rich presence")
 * [Documentation of the Echo API](https://github.com/Ajedi32/echovr_api_docs/ "(unofficial) documentation of the Echo API")
