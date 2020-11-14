@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Platforms>AnyCPU</Platforms>
+    <Authors>x_gaming</Authors>
+    <Description>a program which updates the discord rich presence for the game Echo VR it displays various inforamtion about the game using the echo API</Description>
+    <PackageIcon>Echo Logo.ico</PackageIcon>
+    <NeutralLanguage>en-DE</NeutralLanguage>
+    <StartupObject>RP_EchoVR.Launcher</StartupObject>
+    <ApplicationIcon>Echo_Logo.ico</ApplicationIcon>
+    <PublishTrimmed>true</PublishTrimmed>
+    <Copyright>Copyright © 2020</Copyright>
+    <Company>x_gaming.de</Company>
+    <AssemblyVersion>1.0.0.3</AssemblyVersion>
+    <FileVersion>1.0.0.3</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="DiscordSDK.dll" />
+    <None Remove="RP_EchoVR.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DiscordSDK">
+      <HintPath>DiscordSDK.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="RP_EchoVR.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>
