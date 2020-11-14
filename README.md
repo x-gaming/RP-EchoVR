@@ -38,7 +38,7 @@ here are two tips which may help you if you don't want to use the service-versio
 3. enter the path to the folder using cd 
     (example)
     ```
-    cd C:\Program Files\RP-EchoVR\
+    cd "C:\Program Files\RP-EchoVR\"
     ```
     you can use the tab-key to autocomplete
 4. enter the following command
