@@ -1,0 +1,13 @@
+# Log file
+*.log
+
+# out
+bin/*
+obj/*
+
+# Package Files
+*.zip
+
+# IDE
+*.user
+*.sln
