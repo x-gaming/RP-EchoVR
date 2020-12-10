@@ -27,12 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="DiscordSDK">
-      <HintPath>DiscordSDK.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="RP_EchoVR.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

@@ -6,7 +6,7 @@ RP-EchoVR is a simple program which updates your Discord rich-presence for the V
 * No need to change any paths, fast & easy setup
 
 ## How to install
-At first download and extract the .zip folder.
+At first download and extract the .zip folder from here [Release](https://github.com/x-gaming/RP-EchoVR/releases)
 <details><summary><b>standalone version</b></summary>
 
 1. place the folder in your desired directory (e.g. "Program Files").

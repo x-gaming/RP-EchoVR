@@ -4,12 +4,14 @@ namespace RP_EchoVR {
     class DataConverter {
         private static int[] lastScores = { -1, -1 };
         private static string lastResult = "";
+
         public static string GetDetails(string match_type) {
             string details = match_type.Replace('_', ' ');
             return details;
         }
-        public static  string GetState(string client_name, string map_name, string game_status, int blue_points, int orange_points, LastScore last_score, Team[] teams) {
-            string state = "";
+
+        public static string GetState(string client_name, string map_name, string game_status, int blue_points, int orange_points, LastScore last_score, Team[] teams) {
+            string state;
             if (map_name.Equals("mpl_lobby_b2")) {
                 if (lastScores[0] == -1 || lastScores[1] == -1) {
                     state = "having fun in lobby";
@@ -42,6 +44,7 @@ namespace RP_EchoVR {
             }
             return state;
         }
+
         public static long GetEndTime(string match_type, float game_clock, string game_status) {
             long start = 0;
             if (match_type.Equals("Echo_Arena") || match_type.Equals("Echo_Arena_Private")) {
@@ -52,6 +55,7 @@ namespace RP_EchoVR {
             }
             return start;
         }
+
         private static string GetResult(string client, Player[] players) {
             string result = "defeat";
             foreach (Player player in players) {

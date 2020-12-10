@@ -9,8 +9,10 @@
 using Discord;
 
 namespace RP_EchoVR {
+
     class Launcher {
         static void Main(string[] args) {
+            Discord.Discord discord = new Discord.Discord(773432354274410527, (ulong)CreateFlags.Default);
             DiscordController controller;
             if (args.Length == 0) {
                 System.Console.Title = "RP_EchoVR";
@@ -18,7 +20,8 @@ namespace RP_EchoVR {
             } else {
                 controller = new DiscordController();
             }
-            controller.Init(773432354274410527);
+            controller.Start(discord);
         }
     }
+
 }

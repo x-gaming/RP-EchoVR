@@ -16,7 +16,7 @@ namespace RP_EchoVR {
                 Stream stream = client.OpenRead(url);
                 StreamReader reader = new StreamReader(stream);
                 data = JsonSerializer.Deserialize<EchoData>(reader.ReadToEnd());
-            } catch (Exception) {}
+            } catch (Exception) { }
 
             return data;
         }

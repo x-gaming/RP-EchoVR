@@ -2,8 +2,8 @@
 *.log
 
 # out
-bin/*
-obj/*
+**/bin/*
+**/obj/*
 
 # Package Files
 *.zip

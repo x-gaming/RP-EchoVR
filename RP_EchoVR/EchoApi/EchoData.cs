@@ -8,7 +8,7 @@
         public int orange_points { get; set; } = 0;
         public float game_clock { get; set; } = 0.0f;
         public bool private_match { get; set; } = false;
-        public LastScore last_score {get; set;}
+        public LastScore last_score { get; set; }
         public Team[] teams { get; set; }
     }
     class LastScore {
@@ -24,6 +24,6 @@
 
     class Player {
         public string name { get; set; }
-        public  int level { get; set; }
+        public int level { get; set; }
     }
 }

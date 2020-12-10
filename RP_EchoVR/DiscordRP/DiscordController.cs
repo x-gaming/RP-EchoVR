@@ -1,7 +1,6 @@
 ﻿using RP_EchoVR;
 using System;
 using System.Diagnostics;
-using System.Threading;
 
 namespace Discord {
     class DiscordController {
@@ -13,14 +12,32 @@ namespace Discord {
             this.manually = manually;
             startTime = DateTimeOffset.Now.ToUnixTimeSeconds();
         }
-        public void Init(long id) {
-            Discord discord = new Discord(id, (ulong) CreateFlags.Default);
+
+        public void Start(Discord discord) {
             DataFetcher fetcher = new DataFetcher("http://127.0.0.1:6721/session");
-            Activity activity = new Activity {
-                State = "starting...",
-                Details = "starting...",
+            try {
+                while (manually || Process.GetProcessesByName("echovr").Length > 0) {
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    GC.Collect();
+                    UpdateActivity(discord, fetcher);
+                    discord.RunCallbacks();
+                }
+            } finally {
+                ClearActivity(discord);
+                discord.Dispose();
+            }
+        }
+
+        private void UpdateActivity(Discord discord, DataFetcher fetcher) {
+            EchoData data = fetcher.GetData();
+
+            var activity = new Activity {
+                State = DataConverter.GetState(data.client_name, data.map_name, data.game_status, data.blue_points, data.orange_points, data.last_score, data.teams),
+                Details = DataConverter.GetDetails(data.match_type),
                 Timestamps = {
-                    Start = startTime,
+                Start = startTime,
+                End = DataConverter.GetEndTime(data.match_type, data.game_clock, data.game_status),
                 },
                 Assets = {
                     LargeImage = "echo",
@@ -28,24 +45,22 @@ namespace Discord {
                     SmallImage = "echo_logo",
                     SmallText = "Echo Arena",
                 },
+                Instance = true,
             };
-            while (manually || Process.GetProcessesByName("echovr").Length > 0) {
-                EchoData data = fetcher.GetData();
-                activity.State = DataConverter.GetState(data.client_name, data.map_name, data.game_status, data.blue_points, data.orange_points, data.last_score, data.teams);
-                activity.Details = DataConverter.GetDetails(data.match_type);
-                activity.Timestamps.End = DataConverter.GetEndTime(data.match_type, data.game_clock, data.game_status);
 
-                ActivityManager manager = discord.GetActivityManager();
-                manager.UpdateActivity(activity, result => {
-                    if (result != Result.Ok) {
-                        Console.WriteLine("failed");
-                    }
-                });
-                Thread.Sleep(50);
-                discord.RunCallbacks();
-            }
-            discord.GetActivityManager().ClearActivity(result => { });
-            discord.Dispose();
+            discord.GetActivityManager().UpdateActivity(activity, result => {
+                if (result != Result.Ok) {
+                    Console.WriteLine("failed to update activity");
+                }
+            });
+        }
+
+        private void ClearActivity(Discord discord) {
+            discord.GetActivityManager().ClearActivity(result => {
+                if (result != Result.Ok) {
+                    Console.WriteLine("failed to clear activity");
+                }
+            });
         }
     }
 }
