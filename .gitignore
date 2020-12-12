@@ -9,5 +9,6 @@
 *.zip
 
 # IDE
+/.vs/
 *.user
 *.sln
