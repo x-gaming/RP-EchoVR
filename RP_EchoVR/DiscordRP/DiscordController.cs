@@ -17,9 +17,6 @@ namespace Discord {
             DataFetcher fetcher = new DataFetcher("http://127.0.0.1:6721/session");
             try {
                 while (manually || Process.GetProcessesByName("echovr").Length > 0) {
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                    GC.Collect();
                     UpdateActivity(discord, fetcher);
                     discord.RunCallbacks();
                 }
@@ -30,14 +27,14 @@ namespace Discord {
         }
 
         private void UpdateActivity(Discord discord, DataFetcher fetcher) {
-            EchoData data = fetcher.GetData();
+            EchoData data = fetcher.UseTestData();
 
             var activity = new Activity {
                 State = DataConverter.GetState(data.client_name, data.map_name, data.game_status, data.blue_points, data.orange_points, data.last_score, data.teams),
                 Details = DataConverter.GetDetails(data.match_type),
                 Timestamps = {
                 Start = startTime,
-                End = DataConverter.GetEndTime(data.match_type, data.game_clock, data.game_status),
+                End = DataConverter.GetEndTime(data.match_type, data.game_clock, data.game_status, startTime),
                 },
                 Assets = {
                     LargeImage = "echo",
@@ -61,6 +58,7 @@ namespace Discord {
                     Console.WriteLine("failed to clear activity");
                 }
             });
+            discord.RunCallbacks();
         }
     }
 }

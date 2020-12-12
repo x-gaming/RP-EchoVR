@@ -39,18 +39,22 @@ namespace RP_EchoVR {
                         break;
                     default:
                         state = game_status.Replace('_', ' ');
+                        if (state.Length == 0) {
+                            state = "loading"; 
+                        }
                         break;
                 }
             }
             return state;
         }
 
-        public static long GetEndTime(string match_type, float game_clock, string game_status) {
+        public static long GetEndTime(string match_type, float game_clock, string game_status, long start_time) {
             long start = 0;
             if (match_type.Equals("Echo_Arena") || match_type.Equals("Echo_Arena_Private")) {
-                if (!game_status.Equals("post_match") || !game_status.Equals("post_sudden_death")) {
-                    start = DateTimeOffset.Now.ToUnixTimeSeconds();
-                    start += (long)game_clock + 1;
+                if (!game_status.StartsWith("post") & !game_status.Equals("round_over")) {
+                    start = DateTimeOffset.Now.ToUnixTimeSeconds() + ((long)game_clock + 1);
+                } else {
+                    start = start_time;
                 }
             }
             return start;

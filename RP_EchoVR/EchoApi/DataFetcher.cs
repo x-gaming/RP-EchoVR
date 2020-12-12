@@ -20,5 +20,14 @@ namespace RP_EchoVR {
 
             return data;
         }
-    }
+
+        public EchoData UseTestData() {
+            EchoData data = new EchoData();
+            StreamReader reader = new StreamReader(@"C:/Users/Luca/Downloads/session.json");
+            data = JsonSerializer.Deserialize<EchoData>(reader.ReadToEnd());
+            reader.Close();
+            reader.Dispose();
+            return data;
+        }
+     }
 }
