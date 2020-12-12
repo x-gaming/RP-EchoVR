@@ -27,7 +27,7 @@ namespace Discord {
         }
 
         private void UpdateActivity(Discord discord, DataFetcher fetcher) {
-            EchoData data = fetcher.UseTestData();
+            EchoData data = fetcher.GetData();
 
             var activity = new Activity {
                 State = DataConverter.GetState(data.client_name, data.map_name, data.game_status, data.blue_points, data.orange_points, data.last_score, data.teams),
