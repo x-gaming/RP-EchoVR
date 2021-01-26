@@ -21,7 +21,7 @@ namespace RP_EchoVR {
                 controller = new DiscordController();
             }
             controller.Start(discord);
+            discord.Dispose();
         }
     }
-
 }

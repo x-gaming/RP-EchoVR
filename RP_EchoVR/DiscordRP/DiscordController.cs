@@ -15,15 +15,11 @@ namespace Discord {
 
         public void Start(Discord discord) {
             DataFetcher fetcher = new DataFetcher("http://127.0.0.1:6721/session");
-            try {
-                while (manually || Process.GetProcessesByName("echovr").Length > 0) {
-                    UpdateActivity(discord, fetcher);
-                    discord.RunCallbacks();
-                }
-            } finally {
-                ClearActivity(discord);
-                discord.Dispose();
+            while (manually || Process.GetProcessesByName("echovr").Length > 0) {
+                UpdateActivity(discord, fetcher);
+                discord.RunCallbacks();
             }
+            ClearActivity(discord);
         }
 
         private void UpdateActivity(Discord discord, DataFetcher fetcher) {

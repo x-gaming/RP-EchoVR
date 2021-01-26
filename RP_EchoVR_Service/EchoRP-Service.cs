@@ -18,7 +18,7 @@ namespace EchoRPService {
             timer.Stop();
         }
         private void OnTimer(object sender, ElapsedEventArgs e) {
-            if (IsRunning("echovr") & !IsRunning("RP_EchoVR")) {
+            if (IsRunning("Discord") & IsRunning("echovr") & !IsRunning("RP_EchoVR")) {
                 using (Process process = new Process()) {
                     process.StartInfo.UseShellExecute = false;
                     process.StartInfo.FileName = (System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\RP_EchoVR.exe");
